@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Plus, Minus, Image as ImageIcon, Text as TextIcon } from "lucide-react";
+import { X, Plus, Minus, Image as ImageIcon, CheckSquare } from "lucide-react";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { supabase, Item } from "../lib/supabase";
@@ -315,7 +315,6 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                                         <input
                                             type="text"
                                             value={option.text}
-                                            className="w-full h-12 px-4 py-2 border border-gray-300 rounded-lg"
                                             onChange={(e) =>
                                                 handleOptionTextChange(
                                                     index,
@@ -323,13 +322,12 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                                                 )
                                             }
                                             placeholder="Matn varianti"
-                                            required
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                                         />
                                     ) : (
                                         <input
                                             type="file"
                                             accept="image/*"
-                                            className="w-full h-12 px-4 py-2 border border-gray-300 rounded-lg"
                                             onChange={(e) =>
                                                 handleOptionImageChange(
                                                     index,
@@ -338,7 +336,6 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                                                         : null
                                                 )
                                             }
-                                            required
                                         />
                                     )}
 
@@ -359,22 +356,13 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                                                     )
                                                 )
                                             }
-                                            className="flex items-center px-3 py-1 bg-gray-200 rounded-lg w-36"
+                                            className="flex items-center px-3 py-1 bg-gray-200 rounded-lg"
                                         >
-                                            {!option.is_image ? (
-                                                <ImageIcon
-                                                    size={16}
-                                                    className="mr-1"
-                                                />
-                                            ) : (
-                                                <TextIcon
-                                                    size={16}
-                                                    className="mr-1"
-                                                />
-                                            )}
-                                            {!option.is_image
-                                                ? "Rasm yuklash"
-                                                : "Matn yozish"}
+                                            <ImageIcon
+                                                size={16}
+                                                className="mr-1"
+                                            />
+                                            {option.is_image ? "Rasm" : "Matn"}
                                         </button>
 
                                         <label className="flex items-center space-x-2">

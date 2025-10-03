@@ -9,6 +9,9 @@ export type Item = {
   id: number;
   title: string;
   description: string;
+  test_title: string;
+  color: string;
+  is_colorable: boolean;
   test_options: string[];
   image: string;
   created_at: string;

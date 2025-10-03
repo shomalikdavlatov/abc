@@ -21,7 +21,10 @@ CREATE TABLE IF NOT EXISTS items (
   id bigserial PRIMARY KEY,
   title text NOT NULL DEFAULT '',
   description text NOT NULL DEFAULT '',
-  test_options text[] NOT NULL DEFAULT '{}',
+  test_title text NOT NULL DEFAULT '',
+  color text NOT NULL DEFAULT '',
+  is_colorable boolean NOT NULL DEFAULT true,
+  test_options text[] DEFAULT NULL,
   image text NOT NULL DEFAULT '',
   created_at timestamptz DEFAULT now(),
   updated_at timestamptz DEFAULT now()

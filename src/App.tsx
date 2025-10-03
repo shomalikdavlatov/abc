@@ -5,7 +5,6 @@ import { Sidebar } from './components/Sidebar';
 import { ItemDetail } from './components/ItemDetail';
 import { AddItemModal } from './components/AddItemModal';
 
-const BORDER_COLORS = ['blue', 'yellow', 'green', 'pink', 'purple'];
 const BACKGROUND_IMAGES = [
   'https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1920',
   'https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=1920',
@@ -15,7 +14,6 @@ const BACKGROUND_IMAGES = [
 function App() {
   const [items, setItems] = useState<Item[]>([]);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-  const [borderColor, setBorderColor] = useState('purple');
   const [backgroundImage, setBackgroundImage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -45,15 +43,14 @@ function App() {
 
   const handleSelectItem = (id: number) => {
     setSelectedItemId(id);
-    const randomColor =
-      BORDER_COLORS[Math.floor(Math.random() * BORDER_COLORS.length)];
-    setBorderColor(randomColor);
   };
 
   const handleAddItem = async (newItem: {
     title: string;
     description: string;
-    test_options: string[];
+    test_title: string;
+    color: string;
+    test_options: string[] | null;
     image: string;
   }) => {
     try {
@@ -83,50 +80,53 @@ function App() {
   }
 
   return (
-    <div
-      className="flex h-screen bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
-      <div className="absolute inset-0 bg-purple-900/40 backdrop-blur-sm" />
-
-      <div className="relative z-10 flex w-full">
-        <Sidebar
-          items={items}
-          selectedItemId={selectedItemId}
-          onSelectItem={handleSelectItem}
-        />
-
-        <div className="flex-1">
-          {selectedItem ? (
-            <ItemDetail item={selectedItem} borderColor={borderColor} />
-          ) : (
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center">
-                <h2 className="text-4xl font-bold text-white mb-4">
-                  Welcome to Item Explorer
-                </h2>
-                <p className="text-xl text-purple-200">
-                  Select an item from the sidebar to view details
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-8 right-8 z-20 bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-full shadow-2xl transition-all duration-200 hover:scale-110"
+      <div
+          className="flex h-screen bg-cover bg-center bg-fixed"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <Plus size={32} />
-      </button>
+          <div className="absolute inset-0" />
 
-      <AddItemModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onAdd={handleAddItem}
-      />
-    </div>
+          <div className="relative z-10 flex w-full">
+              <Sidebar
+                  items={items}
+                  selectedItemId={selectedItemId}
+                  onSelectItem={handleSelectItem}
+              />
+
+              <div className="flex-1">
+                  {selectedItem ? (
+                      <ItemDetail
+                          item={selectedItem}
+                      />
+                  ) : (
+                      <div className="flex items-center justify-center h-full">
+                          <div className="text-center">
+                              <h2 className="text-7xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent leading-none pb-2 mb-4 drop-shadow-sm">
+                                  Ranglar jilosi
+                              </h2>
+
+                              <p className="text-xl bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent italic">
+                                  Chap tomondan ma'lumotni tanlang
+                              </p>
+                          </div>
+                      </div>
+                  )}
+              </div>
+          </div>
+
+          <button
+              onClick={() => setIsModalOpen(true)}
+              className="fixed bottom-8 right-8 z-20 bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-full shadow-2xl transition-all duration-200 hover:scale-110"
+          >
+              <Plus size={32} />
+          </button>
+
+          <AddItemModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              onAdd={handleAddItem}
+          />
+      </div>
   );
 }
 

@@ -114,7 +114,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
             />
             <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                 <div className="sticky top-0 bg-purple-600 text-white p-6 rounded-t-2xl flex justify-between items-center">
-                    <h2 className="text-2xl font-bold">Add New Item</h2>
+                    <h2 className="text-2xl font-bold">Yangi element qo'shish</h2>
                     <button
                         onClick={onClose}
                         className="p-2 hover:bg-purple-700 rounded-lg transition-colors"
@@ -124,10 +124,9 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                 </div>
 
                 <form onSubmit={handleSubmit} className="p-6 space-y-6">
-                    {/* Title */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Title
+                            Sarlavha
                         </label>
                         <input
                             type="text"
@@ -138,10 +137,9 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         />
                     </div>
 
-                    {/* Description */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Description
+                            Tavsif
                         </label>
                         <textarea
                             value={description}
@@ -152,10 +150,9 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         />
                     </div>
 
-                    {/* Color */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Color (Hex)
+                            Rang
                         </label>
                         <input
                             type="text"
@@ -167,7 +164,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
 
                         {!isColorValid && (
                             <p className="text-sm text-red-500 mt-2">
-                                Invalid hex — enter 3 or 6 hex digits.
+                                Noto'g'ri rang, 16 lik sanoq tizimida 3 yoki 6 ta son kiriting
                             </p>
                         )}
 
@@ -184,7 +181,6 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         )}
                     </div>
 
-                    {/* ✅ Radio for Rang ishlatilinsinmi */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
                             Rang ishlatilinsinmi?
@@ -215,10 +211,9 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         </div>
                     </div>
 
-                    {/* Upload Image */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Upload Image
+                            Rasm yuklash
                         </label>
                         <input
                             type="file"
@@ -236,7 +231,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                     {/* Test Title */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Test Title
+                            Savol 
                         </label>
                         <input
                             type="text"
@@ -249,7 +244,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                     {/* Dynamic Options */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Test Options (Optional)
+                            Test variantlari (ixtiyoriy)
                         </label>
                         <div className="space-y-3">
                             {options.map((option, index) => (
@@ -284,25 +279,24 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                             onClick={addOption}
                             className="mt-3 flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600"
                         >
-                            <Plus size={16} className="mr-2" /> Add Option
+                            <Plus size={16} className="mr-2" /> Variant qo'shish
                         </button>
                     </div>
 
-                    {/* Buttons */}
                     <div className="flex justify-end space-x-3 pt-4">
                         <button
                             type="button"
                             onClick={onClose}
                             className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-semibold"
                         >
-                            Cancel
+                            Bekor qilish
                         </button>
                         <button
                             type="submit"
                             disabled={loading}
                             className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold shadow-lg disabled:opacity-50"
                         >
-                            {loading ? "Uploading..." : "Add Item"}
+                            {loading ? "Yuklanyapti..." : "Element qo'shish"}
                         </button>
                     </div>
                 </form>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Item } from "../lib/supabase";
 
 interface ItemDetailProps {
@@ -7,8 +7,25 @@ interface ItemDetailProps {
 
 export function ItemDetail({ item }: ItemDetailProps) {
     const [selected, setSelected] = useState<number | null>(null);
+    const optionsRef = useRef<HTMLDivElement | null>(null);
 
     const hasOptions = item.test_options && item.test_options.length > 0;
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                optionsRef.current &&
+                !optionsRef.current.contains(event.target as Node)
+            ) {
+                setSelected(null); // clear selection if click outside
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
         <div className="p-8 h-screen overflow-y-auto">
@@ -37,7 +54,7 @@ export function ItemDetail({ item }: ItemDetailProps) {
 
                 <div className="mb-8">
                     <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                        Ma'lumot
+                        Tavsif
                     </h2>
                     <p
                         className="text-gray-600 leading-relaxed"
@@ -66,7 +83,7 @@ export function ItemDetail({ item }: ItemDetailProps) {
                 )}
 
                 {hasOptions && (
-                    <div className="space-y-3">
+                    <div ref={optionsRef} className="space-y-3">
                         {item.test_options!.map((option, index) => (
                             <label
                                 key={index}

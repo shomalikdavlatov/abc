@@ -10,7 +10,7 @@ export function Sidebar({ items, selectedItemId, onSelectItem }: SidebarProps) {
   return (
       <div className="w-80 bg-purple-700/50 backdrop-blur-sm border-r border-purple-500/30 h-screen overflow-y-auto">
           <div className="p-6">
-              <h2 className="text-2xl font-bold text-white mb-6">Items</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">Elementlar</h2>
               <div className="space-y-3">
                   {items.map((item) => (
                       <button

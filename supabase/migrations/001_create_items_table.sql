@@ -44,3 +44,8 @@ CREATE POLICY "Anyone can update items"
   ON items FOR UPDATE
   USING (true)
   WITH CHECK (true);
+
+CREATE POLICY "Allow delete for all users"
+  ON items FOR DELETE
+  USING (true);
+

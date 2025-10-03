@@ -2,20 +2,12 @@ import { useState } from "react";
 import { X, Plus, Minus } from "lucide-react";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { supabase } from "../lib/supabase";
+import { supabase, Item } from "../lib/supabase";
 
 interface AddItemModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onAdd: (item: {
-        title: string;
-        description: string;
-        test_title: string;
-        color: string;
-        is_colorable: boolean;
-        test_options: string[] | null;
-        image: string;
-    }) => void;
+    onAdd: (item: Item) => void;
 }
 
 export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
@@ -57,21 +49,22 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
             await uploadBytes(fileRef, imageFile);
             const imageUrl = await getDownloadURL(fileRef);
 
-            const item = {
-                title,
-                description,
-                test_title: testTitle,
-                color,
-                is_colorable: isColorable, 
-                test_options: options.length > 0 ? options : null,
-                image: imageUrl,
-            };
-
             const { data, error } = await supabase
                 .from("items")
-                .insert([item])
+                .insert([
+                    {
+                        title,
+                        description,
+                        test_title: testTitle,
+                        color,
+                        is_colorable: isColorable,
+                        test_options: options.length > 0 ? options : null,
+                        image: imageUrl,
+                    },
+                ])
                 .select()
                 .single();
+
             if (error) throw error;
 
             onAdd(data);
@@ -114,7 +107,9 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
             />
             <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                 <div className="sticky top-0 bg-purple-600 text-white p-6 rounded-t-2xl flex justify-between items-center">
-                    <h2 className="text-2xl font-bold">Yangi element qo'shish</h2>
+                    <h2 className="text-2xl font-bold">
+                        Yangi element qo'shish
+                    </h2>
                     <button
                         onClick={onClose}
                         className="p-2 hover:bg-purple-700 rounded-lg transition-colors"
@@ -164,7 +159,8 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
 
                         {!isColorValid && (
                             <p className="text-sm text-red-500 mt-2">
-                                Noto'g'ri rang, 16 lik sanoq tizimida 3 yoki 6 ta son kiriting
+                                Noto'g'ri rang, 16 lik sanoq tizimida 3 yoki 6
+                                ta son kiriting
                             </p>
                         )}
 
@@ -228,10 +224,9 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         />
                     </div>
 
-                    {/* Test Title */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Savol 
+                            Savol
                         </label>
                         <input
                             type="text"
@@ -241,7 +236,6 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         />
                     </div>
 
-                    {/* Dynamic Options */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
                             Test variantlari (ixtiyoriy)
@@ -283,18 +277,18 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         </button>
                     </div>
 
-                    <div className="flex justify-end space-x-3 pt-4">
+                    <div className="flex justify-between space-x-3 pt-4">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-semibold"
+                            className="w-1/2 px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-semibold"
                         >
                             Bekor qilish
                         </button>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold shadow-lg disabled:opacity-50"
+                            className="w-1/2 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold shadow-lg disabled:opacity-50"
                         >
                             {loading ? "Yuklanyapti..." : "Element qo'shish"}
                         </button>

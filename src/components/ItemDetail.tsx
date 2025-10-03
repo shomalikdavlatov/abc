@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-import { Item } from "../lib/supabase";
+import { Item, supabase } from "../lib/supabase";
 
 interface ItemDetailProps {
     item: Item;
+    onDeleted?: () => void;
 }
 
-export function ItemDetail({ item }: ItemDetailProps) {
+export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
     const [selected, setSelected] = useState<number | null>(null);
     const optionsRef = useRef<HTMLDivElement | null>(null);
 
@@ -17,7 +18,7 @@ export function ItemDetail({ item }: ItemDetailProps) {
                 optionsRef.current &&
                 !optionsRef.current.contains(event.target as Node)
             ) {
-                setSelected(null); // clear selection if click outside
+                setSelected(null);
             }
         };
 
@@ -26,6 +27,25 @@ export function ItemDetail({ item }: ItemDetailProps) {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
+    const handleDelete = async () => {
+        if (!confirm("Haqiqatan ham ushbu elementni o'chirmoqchimisiz?"))
+            return;
+
+        const { error } = await supabase
+            .from("items")
+            .delete()
+            .eq("id", item.id);
+
+        if (error) {
+            console.error("Delete failed:", error);
+            alert("Xatolik yuz berdi!");
+        } else {
+            alert("Element o'chirildi!");
+            if (onDeleted) onDeleted(); 
+        }
+    };
+
 
     return (
         <div className="p-8 h-screen overflow-y-auto">
@@ -108,7 +128,7 @@ export function ItemDetail({ item }: ItemDetailProps) {
                                     className="hidden"
                                 />
                                 <div
-                                    className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-semibold`}
+                                    className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-semibold"
                                     style={{
                                         backgroundColor:
                                             selected === index
@@ -123,11 +143,11 @@ export function ItemDetail({ item }: ItemDetailProps) {
                                     {String.fromCharCode(65 + index)}
                                 </div>
                                 <span
-                                    className={`${
+                                    className={
                                         selected === index
                                             ? "font-semibold"
                                             : ""
-                                    }`}
+                                    }
                                     style={{
                                         color:
                                             selected === index
@@ -141,6 +161,14 @@ export function ItemDetail({ item }: ItemDetailProps) {
                         ))}
                     </div>
                 )}
+
+                <button
+                    type="button"
+                    onClick={handleDelete}
+                    className="w-full px-6 py-2 my-4 rounded-lg font-semibold text-white bg-red-500 hover:bg-red-600 transition-colors"
+                >
+                    Elementni o'chirish
+                </button>
             </div>
         </div>
     );

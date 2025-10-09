@@ -32,7 +32,7 @@ function App() {
             const { data, error } = await supabase
                 .from("items")
                 .select("*")
-                .order("created_at", { ascending: false });
+                .order("title");
 
             if (error) throw error;
             setItems(data || []);

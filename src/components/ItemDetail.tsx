@@ -42,7 +42,6 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
         };
     }, []);
 
-    // delete handler
     const handleDelete = async () => {
         if (!confirm("Haqiqatan ham ushbu elementni o'chirmoqchimisiz?"))
             return;
@@ -61,7 +60,6 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
         }
     };
 
-    // check correctness
     const handleCheck = () => {
         if (selected === null) return;
 
@@ -140,7 +138,6 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                         </div>
                     )}
 
-                    {/* Render options only if present */}
                     {hasOptions && (
                         <div ref={optionsRef}>
                             <div className="space-y-3">
@@ -222,6 +219,13 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                             )}
 
                             <div className="flex gap-4 mt-6">
+                                {/* <button
+                                    type="button"
+                                    onClick={handleDelete}
+                                    className="w-1/2 px-6 py-2 rounded-lg font-semibold text-white bg-red-500 hover:bg-red-600 transition-colors"
+                                >
+                                    Elementni o'chirish
+                                </button> */}
                                 <button
                                     type="button"
                                     onClick={handleCheck}

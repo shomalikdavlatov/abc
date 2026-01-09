@@ -17,6 +17,19 @@
     - Add policy for anyone to insert items (for demo purposes)
 */
 
+-- For creating enum type
+-- The code below supports recreating the enum type if it already exists
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_type WHERE typname = 'color_category_enum'
+  ) THEN
+    CREATE TYPE color_category_enum AS ENUM ('RED', 'BLUE', 'GREEN');
+  END IF;
+END$$;
+
+
 CREATE TABLE IF NOT EXISTS items (
   id bigserial PRIMARY KEY,
   title text NOT NULL DEFAULT '',
@@ -24,6 +37,7 @@ CREATE TABLE IF NOT EXISTS items (
   test_title text NOT NULL DEFAULT '',
   color text NOT NULL DEFAULT '',
   is_colorable boolean NOT NULL DEFAULT true,
+  color_category color_category_enum NOT NULL,
   test_options text[] DEFAULT NULL,
   image text NOT NULL DEFAULT '',
   created_at timestamptz DEFAULT now(),

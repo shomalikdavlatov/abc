@@ -5,6 +5,8 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+export type ColorCategory = 'RED' | 'BLUE' | 'GREEN';
+
 export type Item = {
   id: number;
   title: string;
@@ -12,7 +14,8 @@ export type Item = {
   test_title: string;
   color: string;
   is_colorable: boolean;
-  test_options: string[];
+  color_category: ColorCategory;
+  test_options: string[] | null;
   image: string;
   created_at: string;
   updated_at: string;

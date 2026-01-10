@@ -2,7 +2,7 @@ import { useState } from "react";
 import { X, Plus, Minus, Image as ImageIcon, Text as TextIcon } from "lucide-react";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { supabase, Item } from "../lib/supabase";
+import { supabase, Item, ColorCategory } from "../lib/supabase";
 
 interface Option {
     text: string;
@@ -21,6 +21,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
     const [description, setDescription] = useState("");
     const [testTitle, setTestTitle] = useState("");
     const [color, setColor] = useState("");
+    const [colorCategory, setColorCategory] = useState<ColorCategory>("RED");
     const [isColorable, setIsColorable] = useState<boolean>(false);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [options, setOptions] = useState<Option[]>([]);
@@ -86,6 +87,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         description,
                         test_title: testTitle,
                         color,
+                        color_category: colorCategory,
                         is_colorable: isColorable,
                         test_options:
                             processedOptions.length > 0
@@ -105,6 +107,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
             setDescription("");
             setTestTitle("");
             setColor("");
+            setColorCategory("RED");
             setImageFile(null);
             setOptions([]);
             setIsColorable(false);
@@ -159,7 +162,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                 onClick={onClose}
             />
             <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                <div className="sticky top-0 bg-purple-600 text-white p-6 rounded-t-2xl flex justify-between items-center">
+                <div className="sticky top-0 bg-purple-600 text-white p-6 rounded-t-2xl flex justify-between items-center z-10">
                     <h2 className="text-2xl font-bold">
                         Yangi element qo'shish
                     </h2>
@@ -200,10 +203,51 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                         />
                     </div>
 
+                     {/* Color Category */}
+                     <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            Kategoriya Rangi
+                        </label>
+                        <div className="flex gap-4">
+                            {(["RED", "GREEN", "BLUE"] as ColorCategory[]).map((c) => (
+                                <label key={c} className="flex items-center gap-2 cursor-pointer p-2 border rounded-lg hover:bg-gray-50">
+                                    <input
+                                        type="radio"
+                                        name="colorCategory"
+                                        checked={colorCategory === c}
+                                        onChange={() => setColorCategory(c)}
+                                        className="h-4 w-4"
+                                    />
+                                    <span className="font-bold">
+                                        {c === 'RED' ? (
+                                            <>
+                                                <span className="text-red-500">Qizil</span>
+                                                <span className="text-purple-600">-</span>
+                                                <span className="text-yellow-500">sariq</span>
+                                            </>
+                                        ) : c === 'GREEN' ? (
+                                            <>
+                                                <span className="text-yellow-500">Sariq</span>
+                                                <span className="text-purple-600">-</span>
+                                                <span className="text-blue-500">ko'k</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span className="text-blue-500">Ko'k</span>
+                                                <span className="text-purple-600">-</span>
+                                                <span className="text-red-500">qizil</span>
+                                            </>
+                                        )}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* color */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Rang
+                            Batafsil Rang (HEX)
                         </label>
                         <input
                             type="text"

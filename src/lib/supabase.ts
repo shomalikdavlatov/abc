@@ -11,6 +11,7 @@ export type Item = {
   id: number;
   title: string;
   description: string;
+  example: string;
   test_title: string;
   color: string;
   is_colorable: boolean;

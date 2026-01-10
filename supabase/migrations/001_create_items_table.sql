@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS items (
   id bigserial PRIMARY KEY,
   title text NOT NULL DEFAULT '',
   description text NOT NULL DEFAULT '',
+  example text DEFAULT '',
   test_title text NOT NULL DEFAULT '',
   color text NOT NULL DEFAULT '',
   is_colorable boolean NOT NULL DEFAULT true,

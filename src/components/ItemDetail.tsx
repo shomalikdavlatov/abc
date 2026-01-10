@@ -21,7 +21,7 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
     const hasOptions =
         Array.isArray(item.test_options) && item.test_options.length > 0;
     const testOptions = hasOptions
-        ? item.test_options.map((opt) => JSON.parse(opt) as Option)
+        ? item.test_options!.map((opt) => JSON.parse(opt) as Option)
         : [];
 
     // reset when clicking outside
@@ -98,7 +98,7 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
 
                 <div className="w-full md:w-1/2 flex flex-col justify-center">
                     <h1
-                        className="text-7xl font-bold mb-4"
+                        className="text-7xl font-bold mb-4 break-words"
                         style={{
                             color: item.is_colorable ? item.color : "black",
                         }}

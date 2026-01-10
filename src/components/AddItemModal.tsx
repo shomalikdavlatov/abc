@@ -19,6 +19,7 @@ interface AddItemModalProps {
 export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [example, setExample] = useState("");
     const [testTitle, setTestTitle] = useState("");
     const [color, setColor] = useState("");
     const [colorCategory, setColorCategory] = useState<ColorCategory>("RED");
@@ -85,6 +86,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                     {
                         title,
                         description,
+                        example: example || null,
                         test_title: testTitle,
                         color,
                         color_category: colorCategory,
@@ -105,6 +107,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
 
             setTitle("");
             setDescription("");
+            setExample("");
             setTestTitle("");
             setColor("");
             setColorCategory("RED");
@@ -200,6 +203,20 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
                             rows={4}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
                             required
+                        />
+                    </div>
+
+                    {/* example */}
+                    <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            Namuna
+                        </label>
+                        <textarea
+                            value={example}
+                            onChange={(e) => setExample(e.target.value)}
+                            rows={3}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
+                            placeholder="Ixtiyoriy"
                         />
                     </div>
 

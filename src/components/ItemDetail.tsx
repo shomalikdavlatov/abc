@@ -120,6 +120,22 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                         </p>
                     </div>
 
+                    {item.example && (
+                        <div className="mb-8">
+                            <h2 className="text-3xl font-semibold text-gray-700 mb-2">
+                                Namuna
+                            </h2>
+                            <p
+                                className="text-gray-600 leading-relaxed text-xl"
+                                style={{
+                                    color: item.is_colorable ? item.color : "black",
+                                }}
+                            >
+                                {item.example}
+                            </p>
+                        </div>
+                    )}
+
                     {item.test_title && (
                         <div className="mb-6">
                             <h2 className="text-3xl font-semibold text-gray-700 mb-2">

@@ -149,16 +149,16 @@ function App() {
                                 Hozircha bu rangda elementlar mavjud emas.
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-3 gap-8">
                                 {filteredItems.map((item) => (
                                     <button
                                         key={item.id}
                                         onClick={() => handleSelectItem(item.id)}
-                                        className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 text-left group border-4 w-full"
+                                        className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 text-left group border-4 w-full min-h-[200px]"
                                         style={{ borderColor: item.color || '#9333ea' }}
                                     >
                                         <h3 
-                                            className="text-2xl font-bold text-gray-800 mb-2 transition-colors"
+                                            className="text-3xl font-bold text-gray-800 mb-4 transition-colors"
                                             onMouseEnter={(e) => {
                                                 if (item.is_colorable) {
                                                     e.currentTarget.style.color = item.color;
@@ -171,7 +171,7 @@ function App() {
                                             {item.title}
                                         </h3>
                                         <p 
-                                            className="line-clamp-3 text-gray-600 transition-colors"
+                                            className="line-clamp-3 text-gray-600 transition-colors text-lg"
                                             onMouseEnter={(e) => {
                                                 if (item.is_colorable) {
                                                     e.currentTarget.style.color = item.color;

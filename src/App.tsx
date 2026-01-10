@@ -157,10 +157,30 @@ function App() {
                                         className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 text-left group border-4 w-full"
                                         style={{ borderColor: item.color || '#9333ea' }}
                                     >
-                                        <h3 className="text-2xl font-bold text-gray-800 mb-2 group-hover:text-purple-700 transition-colors">
+                                        <h3 
+                                            className="text-2xl font-bold text-gray-800 mb-2 transition-colors"
+                                            onMouseEnter={(e) => {
+                                                if (item.is_colorable) {
+                                                    e.currentTarget.style.color = item.color;
+                                                }
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.color = '#1f2937'; // text-gray-800
+                                            }}
+                                        >
                                             {item.title}
                                         </h3>
-                                        <p className="text-gray-600 line-clamp-3">
+                                        <p 
+                                            className="line-clamp-3 text-gray-600 transition-colors"
+                                            onMouseEnter={(e) => {
+                                                if (item.is_colorable) {
+                                                    e.currentTarget.style.color = item.color;
+                                                }
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.color = '#4b5563'; // text-gray-600
+                                            }}
+                                        >
                                             {item.description}
                                         </p>
                                     </button>

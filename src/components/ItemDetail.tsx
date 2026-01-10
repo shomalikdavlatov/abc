@@ -83,7 +83,7 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                     result === "wrong" ? "animate-shake" : ""
                 }`}
                 style={{
-                    borderColor: item.is_colorable ? item.color : "#AE75DA",
+                    borderColor: item.color ? item.color : "#AE75DA",
                 }}
             >
                 {item.image && (

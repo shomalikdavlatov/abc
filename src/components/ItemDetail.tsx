@@ -139,7 +139,7 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                     {item.test_title && (
                         <div className="mb-6">
                             <h2 className="text-3xl font-semibold text-gray-700 mb-2">
-                                {hasOptions ? "Test" : "Savol"}
+                                {hasOptions ? "Test" : "Topshiriq"}
                             </h2>
                             <p
                                 className="text-xl text-gray-800 font-medium mb-4"

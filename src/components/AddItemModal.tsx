@@ -338,7 +338,7 @@ export function AddItemModal({ isOpen, onClose, onAdd }: AddItemModalProps) {
 
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Savol
+                            Topshiriq
                         </label>
                         <input
                             type="text"

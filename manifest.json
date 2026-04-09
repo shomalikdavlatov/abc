@@ -1,0 +1,28 @@
+{
+  "background_color": "#9333ea",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Lingvorang - Ranglar Jilosi",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "Lingvorang",
+  "start_url": "/lingvorang.uz",
+  "theme_color": "#9333ea",
+  "icons": [
+    {
+      "src": "https://lingvorang.uz/assets/icon-B17ZnnS2.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "isSquare": true,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 512,
+      "is512x512": true,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "lingvorang",
+  "lang": "uz"
+}

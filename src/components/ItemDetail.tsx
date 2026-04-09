@@ -77,9 +77,9 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
     };
 
     return (
-        <div className="p-8 h-screen overflow-y-auto">
+        <div className="p-4 sm:p-6 md:p-8 min-h-screen overflow-y-auto">
             <div
-                className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-8 p-8 max-w-5xl mx-auto flex flex-col md:flex-row gap-8 ${
+                className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-4 sm:border-8 p-4 sm:p-6 md:p-8 max-w-5xl mx-auto flex flex-col md:flex-row gap-5 sm:gap-8 ${
                     result === "wrong" ? "animate-shake" : ""
                 }`}
                 style={{
@@ -91,14 +91,14 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                         <img
                             src={item.image}
                             alt={item.title}
-                            className="w-full h-auto max-h-[500px] object-contain rounded-xl"
+                            className="w-full h-auto max-h-[300px] sm:max-h-[400px] md:max-h-[500px] object-contain rounded-xl"
                         />
                     </div>
                 )}
 
                 <div className="w-full md:w-1/2 flex flex-col justify-center">
                     <h1
-                        className="text-7xl font-bold mb-4 break-words"
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 break-words"
                         style={{
                             color: item.is_colorable ? item.color : "black",
                         }}
@@ -106,12 +106,12 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                         {item.title}
                     </h1>
 
-                    <div className="mb-8">
-                        <h2 className="text-3xl font-semibold text-gray-700 mb-2">
+                    <div className="mb-5 sm:mb-8">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-2">
                             Tavsif
                         </h2>
                         <p
-                            className="text-gray-600 leading-relaxed text-xl"
+                            className="text-gray-600 leading-relaxed text-base sm:text-lg md:text-xl"
                             style={{
                                 color: item.is_colorable ? item.color : "black",
                             }}
@@ -121,12 +121,12 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                     </div>
 
                     {item.example && (
-                        <div className="mb-8">
-                            <h2 className="text-3xl font-semibold text-gray-700 mb-2">
+                        <div className="mb-5 sm:mb-8">
+                            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-2">
                                 Namuna
                             </h2>
                             <p
-                                className="text-gray-600 leading-relaxed text-xl"
+                                className="text-gray-600 leading-relaxed text-base sm:text-lg md:text-xl"
                                 style={{
                                     color: item.is_colorable ? item.color : "black",
                                 }}
@@ -137,12 +137,12 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                     )}
 
                     {item.test_title && (
-                        <div className="mb-6">
-                            <h2 className="text-3xl font-semibold text-gray-700 mb-2">
+                        <div className="mb-4 sm:mb-6">
+                            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-2">
                                 {hasOptions ? "Test" : "Topshiriq"}
                             </h2>
                             <p
-                                className="text-xl text-gray-800 font-medium mb-4"
+                                className="text-base sm:text-lg md:text-xl text-gray-800 font-medium mb-4"
                                 style={{
                                     color: item.is_colorable
                                         ? item.color
@@ -204,7 +204,7 @@ export function ItemDetail({ item, onDeleted }: ItemDetailProps) {
                                                 <img
                                                     src={option.text}
                                                     alt={`Option ${index}`}
-                                                    className="max-w-[150px] max-h-[150px] object-contain rounded"
+                                                    className="max-w-[100px] sm:max-w-[150px] max-h-[100px] sm:max-h-[150px] object-contain rounded"
                                                 />
                                             ) : (
                                                 <span
